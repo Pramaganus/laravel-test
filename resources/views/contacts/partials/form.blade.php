@@ -63,3 +63,16 @@
         @endif
     </div>
 </div>
+
+<div class="form-group{{ $errors->has('contact_address') ? ' has-error' : '' }}">
+    <label for="contact_address" class="col-md-4 control-label">Primary Address</label>
+    <div class="col-md-12">
+        <input id="contact_address" type="text" class="form-control" name="contact_address"
+               value="{{ old('contact_address', $contact->contact_address) }}">
+        @if ($errors->has('contact_address'))
+            <span class="help-block">
+                <strong>{{ $errors->first('contact_address') }}</strong>
+            </span>
+        @endif
+    </div>
+</div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Address;
 use App\Company;
 use App\Contact;
 use App\ContactRole;
@@ -42,9 +43,14 @@ class ContactsController extends Controller
         return view('contacts.edit', compact('contact', 'companies', 'contactRoles'));
     }
 
-    public function update(UpdateContact $request, Contact $contact)
+    public function update(UpdateContact $request, Contact $contact, Address $address)
     {
         $contact->update($request->all());
+
+        $address->updateOrCreate([
+            'contact_id' => $contact->id,
+            'contact_address' => $request->contact_address
+        ]);
 
         return redirect('contacts')->with('alert', 'Contact updated!');
     }

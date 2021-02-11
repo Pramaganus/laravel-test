@@ -63,6 +63,12 @@ class CreateTables extends Migration
             $table->timestamps();
         });
 
+        Schema::create('addresses', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('contact_id');
+            $table->string('contact_address');
+        });
+
     }
 
     /**

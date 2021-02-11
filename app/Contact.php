@@ -42,6 +42,10 @@ class Contact extends Model
         'company_id',
         'contact_role_id'
     ];
+    /**
+     * @var string
+     */
+    public $contact_address;
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
