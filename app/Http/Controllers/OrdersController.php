@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Company;
 use App\Contact;
 use App\Events\OrderSubmitted;
 use App\Http\Requests\CreateOrder;
@@ -13,6 +12,16 @@ class OrdersController extends Controller
     public function index()
     {
         $orders = Orders::all();
+
+        if (request()->has('sort')) {
+            $orders = $orders->sortBy(
+                request('sort'),
+                SORT_REGULAR,
+                request('direction') == 'Desc'
+            );
+        }
+
+
 
         return view('orders.index', compact('orders'));
     }

@@ -15,13 +15,20 @@
           </div>
 
           <div class="card-body">
+              <div class="float-right">
+                  Sort:
+                  <a href="{{ request()->fullUrlWithQuery(['direction' => 'Asc']) }}"
+                     class="@if(request('direction') == 'Asc' || !request()->exists('direction')) font-weight-bold @endif" >Asc</a>
+                  <a href="{{ request()->fullUrlWithQuery(['direction' => 'Desc']) }}"
+                     class="@if(request('direction') == 'Desc') font-weight-bold @endif" >Desc</a>
+              </div>
             <table class="table">
               <thead>
               <tr>
-                <th>#</th>
+                <th><a href="{{ request()->fullUrlWithQuery(['sort' => 'id']) }} ">#</a></th>
                 <th>Contact Ref</th>
-                <th>Product Name</th>
-                <th>Price</th>
+                <th><a href="{{ request()->fullUrlWithQuery(['sort' => 'product']) }}">Product Name</a></th>
+                <th><a href="{{ request()->fullUrlWithQuery(['sort' => 'price']) }}">Price</a></th>
               </tr>
               </thead>
               <tbody>
