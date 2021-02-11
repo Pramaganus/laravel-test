@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use App\Contact;
+use App\Events\OrderSubmitted;
 use App\Http\Requests\CreateOrder;
 use App\Orders;
 
@@ -26,12 +27,13 @@ class OrdersController extends Controller
 
     public function store(CreateOrder $request)
     {
-
         Orders::create([
             'contact_id' => $request->contact,
             'product' => $request->product,
             'price' => $request->price
         ]);
+
+        event(new OrderSubmitted($request->all()));
 
         return redirect('orders')->with('alert', 'Order created!');
     }
