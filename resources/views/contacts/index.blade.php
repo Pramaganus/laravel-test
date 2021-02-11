@@ -47,6 +47,11 @@
         </div>
     </div>
 
-
+    <div class="float-right">
+        @php
+            echo $contacts->links();
+        @endphp
+    </div>
 
 @endsection
+
