@@ -74,6 +74,10 @@ class CreateTables extends Migration
             $table->integer('contact_id');
             $table->string('product');
             $table->float('price');
+            $table->timestamps();
+            $table->foreign('contact_id')
+                ->references('id')
+                ->on('contacts');
         });
     }
 

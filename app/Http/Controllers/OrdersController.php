@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Contact;
 use App\Events\OrderSubmitted;
 use App\Http\Requests\CreateOrder;
+use App\Notifications\OrderWaiting;
 use App\Orders;
+use App\User;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Notification;
 
 class OrdersController extends Controller
 {
@@ -39,10 +43,17 @@ class OrdersController extends Controller
         Orders::create([
             'contact_id' => $request->contact,
             'product' => $request->product,
-            'price' => $request->price
+            'price' => $request->price,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ]);
 
         event(new OrderSubmitted($request->all()));
+        Notification::send(User::all(),
+            (new OrderWaiting())->delay(Carbon::now()->addMinutes(2))
+        );
+
+
 
         return redirect('orders')->with('alert', 'Order created!');
     }

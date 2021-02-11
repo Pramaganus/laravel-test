@@ -10,8 +10,15 @@
 
 @section('content')
   <div class="container">
+
     <div class="row justify-content-center">
       <div class="col-md-8">
+          <div class="font-weight-bold text-info">
+              @foreach($notifications as $notification)
+                  <h1>{{ $notification->data['body'] }}</h1>
+                      {{ $notification->markAsRead() }}
+              @endforeach
+          </div>
         <div class="card">
           <div class="card-header">Dashboard</div>
 
