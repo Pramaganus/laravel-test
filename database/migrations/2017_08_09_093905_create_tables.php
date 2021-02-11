@@ -69,6 +69,12 @@ class CreateTables extends Migration
             $table->string('contact_address');
         });
 
+        Schema::create('orders', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('contact_id');
+            $table->string('product');
+            $table->float('price');
+        });
     }
 
     /**
